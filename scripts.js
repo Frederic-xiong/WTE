@@ -1,72 +1,73 @@
 let currentMood = '';
+let currentRecipeIndex = 0;
 
-function selectMood(mood) {
+function showMoodRecipe(mood) {
+    // Update current mood and reset recipe index
     currentMood = mood;
+    currentRecipeIndex = 0;
     
     // Update button states
     document.querySelectorAll('.mood-btn').forEach(btn => {
         btn.classList.remove('active');
     });
+    document.querySelector(`button[onclick="showMoodRecipe('${mood}')"]`).classList.add('active');
     
-    // Find and activate the clicked button
-    const clickedButton = document.querySelector(`[data-mood="${mood}"]`);
-    clickedButton.classList.add('active');
+    // Show recipe
+    showRecipe();
     
-    // Enable the generate button
-    const generateButton = document.getElementById('generateButton');
-    generateButton.removeAttribute('disabled');
-    generateButton.classList.add('enabled');
+    // Show the "next recipe" button if there are multiple recipes
+    const nextButton = document.getElementById('nextRecipe');
+    if (recipeDatabase[mood].length > 1) {
+        nextButton.style.display = 'block';
+    } else {
+        nextButton.style.display = 'none';
+    }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const generateButton = document.getElementById('generateButton');
-    const nextRecipeButton = document.getElementById('nextRecipe');
+function showNextRecipe() {
+    currentRecipeIndex++;
+    if (currentRecipeIndex >= recipeDatabase[currentMood].length) {
+        currentRecipeIndex = 0;
+    }
+    showRecipe();
+}
 
-    generateButton.addEventListener('click', function() {
-        if (currentMood) {
-            showRandomRecipe();
-            nextRecipeButton.style.display = 'block';
-        }
-    });
-
-    nextRecipeButton?.addEventListener('click', showRandomRecipe);
-});
-
-function showRandomRecipe() {
-    const recipes = recipeDatabase[currentMood];
-    const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
-    
+function showRecipe() {
+    const recipe = recipeDatabase[currentMood][currentRecipeIndex];
     const resultsDiv = document.getElementById('recipe-results');
     
     resultsDiv.innerHTML = `
         <div class="recipe-card">
-            <img src="${randomRecipe.image}" alt="${randomRecipe.name}" class="recipe-image" 
+            <img src="${recipe.image}" alt="${recipe.name}" class="recipe-image" 
                  onerror="this.src='https://via.placeholder.com/400x300?text=Delicious+Recipe'">
             <div class="recipe-info">
                 <span class="mood-label">${currentMood.toUpperCase()}</span>
-                <h3>${randomRecipe.name}</h3>
-                <p class="description">${randomRecipe.description}</p>
+                <h3>${recipe.name}</h3>
+                <p class="description">${recipe.description}</p>
                 
                 <div class="recipe-details">
                     <h4>Ingredients:</h4>
                     <ul>
-                        ${randomRecipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                        ${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
                     </ul>
                     
                     <h4>Instructions:</h4>
                     <ol>
-                        ${randomRecipe.instructions.map(inst => `<li>${inst}</li>`).join('')}
+                        ${recipe.instructions.map(inst => `<li>${inst}</li>`).join('')}
                     </ol>
                     
                     <div class="nutrition-info">
                         <h4>Nutrition Information:</h4>
-                        <p>Calories: ${randomRecipe.nutrition.calories}</p>
-                        <p>Protein: ${randomRecipe.nutrition.protein}</p>
-                        <p>Carbs: ${randomRecipe.nutrition.carbs}</p>
-                        <p>Fat: ${randomRecipe.nutrition.fat}</p>
+                        <p>Calories: ${recipe.nutrition.calories}</p>
+                        <p>Protein: ${recipe.nutrition.protein}</p>
+                        <p>Carbs: ${recipe.nutrition.carbs}</p>
+                        <p>Fat: ${recipe.nutrition.fat}</p>
                     </div>
                 </div>
             </div>
         </div>
     `;
+
+    // Scroll to the recipe
+    resultsDiv.scrollIntoView({ behavior: 'smooth' });
 }
