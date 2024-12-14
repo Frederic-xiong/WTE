@@ -3,12 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodFood - Find Recipes Based on Your Mood</title>
+    <title>MoodFood Pro - Your Emotional Recipe Guide</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>MoodFood 🍽️</h1>
+        <header>
+            <h1>MoodFood Pro 🍽️</h1>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search recipes...">
+                <button onclick="searchRecipes()"><i class="fas fa-search"></i></button>
+            </div>
+        </header>
+
+        <div class="filters">
+            <div class="filter-section">
+                <h3>Dietary Preferences</h3>
+                <label><input type="checkbox" value="vegetarian"> Vegetarian</label>
+                <label><input type="checkbox" value="vegan"> Vegan</label>
+                <label><input type="checkbox" value="gluten-free"> Gluten-Free</label>
+            </div>
+            <div class="filter-section">
+                <h3>Preparation Time</h3>
+                <label><input type="radio" name="prep-time" value="quick"> Quick (< 15 min)</label>
+                <label><input type="radio" name="prep-time" value="medium"> Medium (15-30 min)</label>
+                <label><input type="radio" name="prep-time" value="long"> Long (> 30 min)</label>
+            </div>
+        </div>
+
         <div class="mood-selector">
             <h2>How are you feeling today?</h2>
             <div class="mood-buttons">
@@ -19,8 +42,19 @@
                 <button onclick="selectMood('tired')" class="mood-btn">😴 Tired</button>
             </div>
         </div>
+
         <div id="recipe-results" class="recipe-results"></div>
     </div>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="recipes-data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
