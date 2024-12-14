@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodFood - Find Your Perfect Mood Recipe</title>
+    <title>MoodFood</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>MoodFood 🍽️</h1>
-            <p class="subtitle">Click your mood for a perfect recipe match!</p>
+            <p class="subtitle">Click your mood and discover a recipe!</p>
         </header>
 
         <div class="mood-selector">
             <h2>How are you feeling today?</h2>
             <div class="mood-buttons">
-                <button onclick="showMoodRecipe('happy')" class="mood-btn">😊 Happy</button>
-                <button onclick="showMoodRecipe('sad')" class="mood-btn">😢 Sad</button>
-                <button onclick="showMoodRecipe('stressed')" class="mood-btn">😰 Stressed</button>
-                <button onclick="showMoodRecipe('energetic')" class="mood-btn">⚡ Energetic</button>
-                <button onclick="showMoodRecipe('tired')" class="mood-btn">😴 Tired</button>
+                <button class="mood-btn" data-mood="happy">😊 Happy</button>
+                <button class="mood-btn" data-mood="sad">😢 Sad</button>
+                <button class="mood-btn" data-mood="stressed">😰 Stressed</button>
+                <button class="mood-btn" data-mood="energetic">⚡ Energetic</button>
+                <button class="mood-btn" data-mood="tired">😴 Tired</button>
             </div>
         </div>
 
         <div id="recipe-results" class="recipe-results"></div>
-        <button id="nextRecipe" class="next-recipe-btn" style="display: none;" onclick="showNextRecipe()">Try Another Recipe</button>
     </div>
+
     <script src="recipes-data.js"></script>
     <script src="script.js"></script>
 </body>
