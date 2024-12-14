@@ -1,30 +1,27 @@
 let currentMood = '';
 
+function selectMood(mood) {
+    currentMood = mood;
+    
+    // Update button states
+    document.querySelectorAll('.mood-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Find and activate the clicked button
+    const clickedButton = document.querySelector(`[data-mood="${mood}"]`);
+    clickedButton.classList.add('active');
+    
+    // Enable the generate button
+    const generateButton = document.getElementById('generateButton');
+    generateButton.removeAttribute('disabled');
+    generateButton.classList.add('enabled');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Get references to buttons
     const generateButton = document.getElementById('generateButton');
     const nextRecipeButton = document.getElementById('nextRecipe');
-    const moodButtons = document.querySelectorAll('.mood-btn');
 
-    // Add click handlers to mood buttons
-    moodButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            moodButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class to clicked button
-            this.classList.add('active');
-            
-            // Store the selected mood
-            currentMood = this.getAttribute('data-mood');
-            
-            // Enable the generate button
-            generateButton.removeAttribute('disabled');
-            generateButton.classList.add('enabled');
-        });
-    });
-
-    // Add click handler to generate button
     generateButton.addEventListener('click', function() {
         if (currentMood) {
             showRandomRecipe();
@@ -32,8 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Add click handler to next recipe button
-    nextRecipeButton.addEventListener('click', showRandomRecipe);
+    nextRecipeButton?.addEventListener('click', showRandomRecipe);
 });
 
 function showRandomRecipe() {
