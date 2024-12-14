@@ -8,6 +8,7 @@
 body {
     background-color: #f4f4f9;
     color: #333;
+    min-height: 100vh;
 }
 
 .container {
@@ -35,17 +36,30 @@ h1 {
 .mood-selector {
     text-align: center;
     margin-bottom: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .mood-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     justify-content: center;
     margin-top: 20px;
+    position: relative;
 }
 
-.mood-btn {
+/* Hide radio buttons but keep them accessible */
+.mood-buttons input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Style labels as buttons */
+.mood-label {
     padding: 15px 25px;
     font-size: 1.2em;
     border: none;
@@ -54,10 +68,26 @@ h1 {
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-block;
+    user-select: none;
 }
 
-.mood-btn:hover {
+.mood-label:hover {
     background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Style for selected radio button's label */
+input[type="radio"]:checked + .mood-label {
+    background-color: #2980b9;
+    transform: scale(1.05);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* Add focus styles for accessibility */
+input[type="radio"]:focus + .mood-label {
+    outline: 2px solid #2980b9;
+    outline-offset: 2px;
 }
 
 .recipe-results {
@@ -67,26 +97,53 @@ h1 {
 .recipe-card {
     background: white;
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 20px;
     margin-top: 20px;
 }
 
 .recipe-card img {
     width: 100%;
+    max-height: 300px;
+    object-fit: cover;
     border-radius: 10px;
     margin-bottom: 15px;
 }
 
 .recipe-card h3 {
-    color: #333;
+    color: #2c3e50;
     margin-bottom: 10px;
+    font-size: 1.5em;
 }
 
-.recipe-card ul, .recipe-card ol {
+.recipe-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.recipe-card h4 {
+    color: #2c3e50;
+    margin: 15px 0 10px 0;
+}
+
+.recipe-card ul, 
+.recipe-card ol {
     margin-left: 20px;
+    margin-bottom: 15px;
 }
 
-.recipe-card ul li, .recipe-card ol li {
-    margin-bottom: 5px;
+.recipe-card li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+    .mood-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .mood-label {
+        width: 100%;
+    }
 }
