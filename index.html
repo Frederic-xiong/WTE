@@ -5,29 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoodFood - Find Your Perfect Mood Recipe</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>MoodFood 🍽️</h1>
-            <p class="subtitle">Let your feelings guide your meal</p>
+            <p class="subtitle">Click your mood for a perfect recipe match!</p>
         </header>
 
         <div class="mood-selector">
             <h2>How are you feeling today?</h2>
             <div class="mood-buttons">
-                <button type="button" class="mood-btn" onclick="selectMood('happy')" data-mood="happy">😊 Happy</button>
-                <button type="button" class="mood-btn" onclick="selectMood('sad')" data-mood="sad">😢 Sad</button>
-                <button type="button" class="mood-btn" onclick="selectMood('stressed')" data-mood="stressed">😰 Stressed</button>
-                <button type="button" class="mood-btn" onclick="selectMood('energetic')" data-mood="energetic">⚡ Energetic</button>
-                <button type="button" class="mood-btn" onclick="selectMood('tired')" data-mood="tired">😴 Tired</button>
+                <button onclick="showMoodRecipe('happy')" class="mood-btn">😊 Happy</button>
+                <button onclick="showMoodRecipe('sad')" class="mood-btn">😢 Sad</button>
+                <button onclick="showMoodRecipe('stressed')" class="mood-btn">😰 Stressed</button>
+                <button onclick="showMoodRecipe('energetic')" class="mood-btn">⚡ Energetic</button>
+                <button onclick="showMoodRecipe('tired')" class="mood-btn">😴 Tired</button>
             </div>
-            <button type="button" id="generateButton" class="generate-btn" disabled>Let's Eat!</button>
         </div>
 
         <div id="recipe-results" class="recipe-results"></div>
-        <button id="nextRecipe" class="next-recipe-btn" style="display: none;">Try Another Recipe</button>
+        <button id="nextRecipe" class="next-recipe-btn" style="display: none;" onclick="showNextRecipe()">Try Another Recipe</button>
     </div>
     <script src="recipes-data.js"></script>
     <script src="script.js"></script>
