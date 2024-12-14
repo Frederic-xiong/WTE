@@ -8,6 +8,7 @@
 body {
     background-color: #f0f2f5;
     color: #333;
+    min-height: 100vh;
 }
 
 .container {
@@ -47,8 +48,6 @@ h1 {
     gap: 10px;
     justify-content: center;
     margin: 20px 0;
-    position: relative;
-    z-index: 1;
 }
 
 .mood-btn {
@@ -60,10 +59,6 @@ h1 {
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
-    outline: none;
-    pointer-events: auto;
-    z-index: 1;
-    position: relative;
 }
 
 .mood-btn:hover {
@@ -75,28 +70,6 @@ h1 {
     background-color: #2980b9;
     transform: scale(1.05);
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-
-.generate-btn {
-    padding: 15px 40px;
-    font-size: 1.3em;
-    background-color: #bdc3c7;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: not-allowed;
-    transition: all 0.3s ease;
-    margin: 20px 0;
-}
-
-.generate-btn.enabled {
-    background-color: #2ecc71;
-    cursor: pointer;
-}
-
-.generate-btn.enabled:hover {
-    background-color: #27ae60;
-    transform: translateY(-2px);
 }
 
 .recipe-card {
@@ -113,10 +86,6 @@ h1 {
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 20px;
-}
-
-.recipe-info {
-    padding: 20px;
 }
 
 .mood-label {
@@ -138,20 +107,14 @@ h1 {
     color: #2c3e50;
 }
 
-.recipe-details ul, .recipe-details ol {
+.recipe-details ul, 
+.recipe-details ol {
     margin-left: 20px;
     margin-bottom: 15px;
 }
 
 .recipe-details li {
     margin-bottom: 5px;
-}
-
-.nutrition-info {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 5px;
-    margin-top: 20px;
 }
 
 .next-recipe-btn {
