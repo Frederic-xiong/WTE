@@ -17,13 +17,13 @@
         <div class="mood-selector">
             <h2>How are you feeling today?</h2>
             <div class="mood-buttons">
-                <button class="mood-btn" data-mood="happy">😊 Happy</button>
-                <button class="mood-btn" data-mood="sad">😢 Sad</button>
-                <button class="mood-btn" data-mood="stressed">😰 Stressed</button>
-                <button class="mood-btn" data-mood="energetic">⚡ Energetic</button>
-                <button class="mood-btn" data-mood="tired">😴 Tired</button>
+                <button type="button" class="mood-btn" onclick="selectMood('happy')" data-mood="happy">😊 Happy</button>
+                <button type="button" class="mood-btn" onclick="selectMood('sad')" data-mood="sad">😢 Sad</button>
+                <button type="button" class="mood-btn" onclick="selectMood('stressed')" data-mood="stressed">😰 Stressed</button>
+                <button type="button" class="mood-btn" onclick="selectMood('energetic')" data-mood="energetic">⚡ Energetic</button>
+                <button type="button" class="mood-btn" onclick="selectMood('tired')" data-mood="tired">😴 Tired</button>
             </div>
-            <button id="generateButton" class="generate-btn" disabled>Let's Eat!</button>
+            <button type="button" id="generateButton" class="generate-btn" disabled>Let's Eat!</button>
         </div>
 
         <div id="recipe-results" class="recipe-results"></div>
