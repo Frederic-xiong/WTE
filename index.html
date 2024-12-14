@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodFood - Find Recipes Based on Your Mood</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>MoodFood 🍽️</h1>
+        <div class="mood-selector">
+            <h2>How are you feeling today?</h2>
+            <div class="mood-buttons">
+                <button onclick="selectMood('happy')" class="mood-btn">😊 Happy</button>
+                <button onclick="selectMood('sad')" class="mood-btn">😢 Sad</button>
+                <button onclick="selectMood('stressed')" class="mood-btn">😰 Stressed</button>
+                <button onclick="selectMood('energetic')" class="mood-btn">⚡ Energetic</button>
+                <button onclick="selectMood('tired')" class="mood-btn">😴 Tired</button>
+            </div>
+        </div>
+        <div id="recipe-results" class="recipe-results"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
