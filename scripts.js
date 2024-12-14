@@ -1,73 +1,49 @@
+// Global variables
 let currentMood = '';
-let currentRecipeIndex = 0;
 
-function showMoodRecipe(mood) {
-    // Update current mood and reset recipe index
+// Function to handle mood selection and display a recipe
+function handleMoodClick(event) {
+    const mood = event.target.getAttribute('data-mood');
     currentMood = mood;
-    currentRecipeIndex = 0;
-    
-    // Update button states
-    document.querySelectorAll('.mood-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.querySelector(`button[onclick="showMoodRecipe('${mood}')"]`).classList.add('active');
-    
-    // Show recipe
-    showRecipe();
-    
-    // Show the "next recipe" button if there are multiple recipes
-    const nextButton = document.getElementById('nextRecipe');
-    if (recipeDatabase[mood].length > 1) {
-        nextButton.style.display = 'block';
-    } else {
-        nextButton.style.display = 'none';
-    }
+    displayRecipe(mood);
 }
 
-function showNextRecipe() {
-    currentRecipeIndex++;
-    if (currentRecipeIndex >= recipeDatabase[currentMood].length) {
-        currentRecipeIndex = 0;
+// Function to display a random recipe for the selected mood
+function displayRecipe(mood) {
+    const recipes = recipeDatabase[mood];
+    if (!recipes || recipes.length === 0) {
+        document.getElementById('recipe-results').innerHTML = '<p>No recipes found for this mood.</p>';
+        return;
     }
-    showRecipe();
-}
 
-function showRecipe() {
-    const recipe = recipeDatabase[currentMood][currentRecipeIndex];
-    const resultsDiv = document.getElementById('recipe-results');
-    
-    resultsDiv.innerHTML = `
+    // Pick a random recipe
+    const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
+
+    // Generate recipe HTML
+    const recipeHTML = `
         <div class="recipe-card">
-            <img src="${recipe.image}" alt="${recipe.name}" class="recipe-image" 
-                 onerror="this.src='https://via.placeholder.com/400x300?text=Delicious+Recipe'">
-            <div class="recipe-info">
-                <span class="mood-label">${currentMood.toUpperCase()}</span>
-                <h3>${recipe.name}</h3>
-                <p class="description">${recipe.description}</p>
-                
-                <div class="recipe-details">
-                    <h4>Ingredients:</h4>
-                    <ul>
-                        ${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                    </ul>
-                    
-                    <h4>Instructions:</h4>
-                    <ol>
-                        ${recipe.instructions.map(inst => `<li>${inst}</li>`).join('')}
-                    </ol>
-                    
-                    <div class="nutrition-info">
-                        <h4>Nutrition Information:</h4>
-                        <p>Calories: ${recipe.nutrition.calories}</p>
-                        <p>Protein: ${recipe.nutrition.protein}</p>
-                        <p>Carbs: ${recipe.nutrition.carbs}</p>
-                        <p>Fat: ${recipe.nutrition.fat}</p>
-                    </div>
-                </div>
-            </div>
+            <img src="${randomRecipe.image}" alt="${randomRecipe.name}">
+            <h3>${randomRecipe.name}</h3>
+            <p>${randomRecipe.description}</p>
+            <h4>Ingredients:</h4>
+            <ul>
+                ${randomRecipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+            </ul>
+            <h4>Instructions:</h4>
+            <ol>
+                ${randomRecipe.instructions.map(step => `<li>${step}</li>`).join('')}
+            </ol>
         </div>
     `;
 
-    // Scroll to the recipe
-    resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    // Display the recipe
+    document.getElementById('recipe-results').innerHTML = recipeHTML;
 }
+
+// Add event listeners to mood buttons
+document.addEventListener('DOMContentLoaded', function () {
+    const moodButtons = document.querySelectorAll('.mood-btn');
+    moodButtons.forEach(button => {
+        button.addEventListener('click', handleMoodClick);
+    });
+});
