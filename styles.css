@@ -33,7 +33,7 @@ h1 {
     font-size: 1.2em;
 }
 
-.mood-selector {
+.mood-input-section {
     text-align: center;
     margin-bottom: 20px;
     background-color: white;
@@ -42,56 +42,47 @@ h1 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.mood-buttons {
+.input-wrapper {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 20px;
-    position: relative;
+    gap: 10px;
+    max-width: 500px;
+    margin: 20px auto;
 }
 
-/* Hide radio buttons but keep them accessible */
-.mood-buttons input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-
-/* Style labels as buttons */
-.mood-label {
-    padding: 15px 25px;
-    font-size: 1.2em;
-    border: none;
+#moodInput {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    border: 2px solid #e0e0e0;
     border-radius: 25px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#moodInput:focus {
+    border-color: #3498db;
+}
+
+#submitMood {
+    padding: 12px 25px;
+    font-size: 1.1em;
     background-color: #3498db;
     color: white;
+    border: none;
+    border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-block;
-    user-select: none;
 }
 
-.mood-label:hover {
+#submitMood:hover {
     background-color: #2980b9;
     transform: translateY(-2px);
 }
 
-/* Style for selected radio button's label */
-input[type="radio"]:checked + .mood-label {
-    background-color: #2980b9;
-    transform: scale(1.05);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-
-/* Add focus styles for accessibility */
-input[type="radio"]:focus + .mood-label {
-    outline: 2px solid #2980b9;
-    outline-offset: 2px;
-}
-
-.recipe-results {
-    margin-top: 30px;
+.mood-hint {
+    color: #7f8c8d;
+    font-size: 0.9em;
+    margin-top: 10px;
 }
 
 .recipe-card {
@@ -137,13 +128,19 @@ input[type="radio"]:focus + .mood-label {
     line-height: 1.4;
 }
 
+.error-message {
+    color: #e74c3c;
+    padding: 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+
 @media (max-width: 600px) {
-    .mood-buttons {
+    .input-wrapper {
         flex-direction: column;
-        align-items: stretch;
     }
     
-    .mood-label {
+    #submitMood {
         width: 100%;
     }
 }
