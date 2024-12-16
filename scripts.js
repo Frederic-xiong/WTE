@@ -1,49 +1,107 @@
-// Global variables
-let currentMood = '';
-
-// Function to handle mood selection and display a recipe
-function handleMoodClick(event) {
-    const mood = event.target.getAttribute('data-mood');
-    currentMood = mood;
-    displayRecipe(mood);
-}
-
-// Function to display a random recipe for the selected mood
-function displayRecipe(mood) {
-    const recipes = recipeDatabase[mood];
-    if (!recipes || recipes.length === 0) {
-        document.getElementById('recipe-results').innerHTML = '<p>No recipes found for this mood.</p>';
-        return;
+document.addEventListener('DOMContentLoaded', function() {
+    const moodInput = document.getElementById('moodInput');
+    const submitButton = document.getElementById('submitMood');
+    const validMoods = ['happy', 'sad', 'stressed', 'energetic', 'tired'];
+    
+    function processEmotion(input) {
+        // Convert input to lowercase and trim whitespace
+        const cleanInput = input.toLowerCase().trim();
+        
+        // Simple emotion mapping
+        const emotionMap = {
+            // Happy variations
+            'happy': 'happy',
+            'joyful': 'happy',
+            'excited': 'happy',
+            'great': 'happy',
+            'good': 'happy',
+            
+            // Sad variations
+            'sad': 'sad',
+            'down': 'sad',
+            'depressed': 'sad',
+            'blue': 'sad',
+            'unhappy': 'sad',
+            
+            // Stressed variations
+            'stressed': 'stressed',
+            'anxious': 'stressed',
+            'worried': 'stressed',
+            'overwhelmed': 'stressed',
+            'tense': 'stressed',
+            
+            // Energetic variations
+            'energetic': 'energetic',
+            'active': 'energetic',
+            'energized': 'energetic',
+            'motivated': 'energetic',
+            'pumped': 'energetic',
+            
+            // Tired variations
+            'tired': 'tired',
+            'sleepy': 'tired',
+            'exhausted': 'tired',
+            'fatigued': 'tired',
+            'drained': 'tired'
+        };
+        
+        return emotionMap[cleanInput] || null;
     }
 
-    // Pick a random recipe
-    const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
+    function showRecipe(mood) {
+        const recipes = recipeDatabase[mood];
+        if (!recipes || recipes.length === 0) {
+            document.getElementById('recipe-results').innerHTML = 
+                '<p class="error-message">No recipes available for this mood.</p>';
+            return;
+        }
 
-    // Generate recipe HTML
-    const recipeHTML = `
-        <div class="recipe-card">
-            <img src="${randomRecipe.image}" alt="${randomRecipe.name}">
-            <h3>${randomRecipe.name}</h3>
-            <p>${randomRecipe.description}</p>
-            <h4>Ingredients:</h4>
-            <ul>
-                ${randomRecipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-            </ul>
-            <h4>Instructions:</h4>
-            <ol>
-                ${randomRecipe.instructions.map(step => `<li>${step}</li>`).join('')}
-            </ol>
-        </div>
-    `;
+        const recipe = recipes[Math.floor(Math.random() * recipes.length)];
+        
+        document.getElementById('recipe-results').innerHTML = `
+            <div class="recipe-card">
+                <img src="${recipe.image}" alt="${recipe.name}"
+                     onerror="this.src='https://via.placeholder.com/400x300?text=Recipe+Image'">
+                <h3>${recipe.name}</h3>
+                <p>${recipe.description}</p>
+                <h4>Ingredients:</h4>
+                <ul>
+                    ${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                </ul>
+                <h4>Instructions:</h4>
+                <ol>
+                    ${recipe.instructions.map(inst => `<li>${inst}</li>`).join('')}
+                </ol>
+            </div>
+        `;
 
-    // Display the recipe
-    document.getElementById('recipe-results').innerHTML = recipeHTML;
-}
+        document.getElementById('recipe-results').scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
 
-// Add event listeners to mood buttons
-document.addEventListener('DOMContentLoaded', function () {
-    const moodButtons = document.querySelectorAll('.mood-btn');
-    moodButtons.forEach(button => {
-        button.addEventListener('click', handleMoodClick);
+    function handleSubmit() {
+        const userInput = moodInput.value;
+        const processedMood = processEmotion(userInput);
+        
+        if (!processedMood) {
+            document.getElementById('recipe-results').innerHTML = `
+                <p class="error-message">
+                    I don't recognize that emotion. Try one of these: happy, sad, stressed, energetic, tired
+                </p>
+            `;
+            return;
+        }
+        
+        showRecipe(processedMood);
+    }
+
+    // Event listeners
+    submitButton.addEventListener('click', handleSubmit);
+    moodInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
     });
 });
