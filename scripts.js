@@ -1,13 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     const moodInput = document.getElementById('moodInput');
     const submitButton = document.getElementById('submitMood');
-    const validMoods = ['happy', 'sad', 'stressed', 'energetic', 'tired'];
     
     function processEmotion(input) {
-        // Convert input to lowercase and trim whitespace
         const cleanInput = input.toLowerCase().trim();
         
-        // Simple emotion mapping
         const emotionMap = {
             // Happy variations
             'happy': 'happy',
@@ -83,6 +80,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleSubmit() {
         const userInput = moodInput.value;
+        if (!userInput) {
+            document.getElementById('recipe-results').innerHTML = 
+                '<p class="error-message">Please enter how you\'re feeling</p>';
+            return;
+        }
+
         const processedMood = processEmotion(userInput);
         
         if (!processedMood) {
@@ -99,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event listeners
     submitButton.addEventListener('click', handleSubmit);
+    
     moodInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             handleSubmit();
