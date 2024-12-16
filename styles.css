@@ -133,6 +133,8 @@ h1 {
     padding: 10px;
     text-align: center;
     margin-top: 10px;
+    background-color: #fdf0ef;
+    border-radius: 5px;
 }
 
 @media (max-width: 600px) {
