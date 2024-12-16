@@ -3,29 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodFood - Emotion-Based Recipe Finder</title>
+    <title>MoodFood</title>
+    <!-- Update paths to match new structure -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>MoodFood 🍽️</h1>
-            <p class="subtitle">Tell us how you're feeling for a perfect recipe match</p>
-        </header>
-
-        <div class="mood-input-section">
-            <h2>How are you feeling today?</h2>
-            <div class="input-wrapper">
-                <input type="text" id="moodInput" placeholder="Describe your mood...">
-                <button type="button" id="submitMood">Find Recipe</button>
-            </div>
-            <p class="mood-hint">We can process these emotions: happy, sad, stressed, energetic, tired</p>
+        <h1>MoodFood 🍽️</h1>
+        <div class="input-wrapper">
+            <input type="text" id="moodInput" placeholder="Enter your mood...">
+            <button type="button" id="submitMood">Find Recipe</button>
         </div>
-
-        <div id="recipe-results" class="recipe-results"></div>
+        <p class="mood-hint">Try: happy, sad, stressed, energetic, tired</p>
+        <div id="recipe-results"></div>
     </div>
 
+    <!-- Update script paths to match new structure -->
     <script src="js/recipes-data.js"></script>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
