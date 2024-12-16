@@ -3,34 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodFood</title>
+    <title>MoodFood - Emotion-Based Recipe Finder</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>MoodFood 🍽️</h1>
-            <p class="subtitle">Select your mood and discover a recipe!</p>
+            <p class="subtitle">Tell us how you're feeling for a perfect recipe match</p>
         </header>
 
-        <div class="mood-selector">
+        <div class="mood-input-section">
             <h2>How are you feeling today?</h2>
-            <div class="mood-buttons">
-                <input type="radio" id="happy" name="mood" value="happy">
-                <label for="happy" class="mood-label">😊 Happy</label>
-
-                <input type="radio" id="sad" name="mood" value="sad">
-                <label for="sad" class="mood-label">😢 Sad</label>
-
-                <input type="radio" id="stressed" name="mood" value="stressed">
-                <label for="stressed" class="mood-label">😰 Stressed</label>
-
-                <input type="radio" id="energetic" name="mood" value="energetic">
-                <label for="energetic" class="mood-label">⚡ Energetic</label>
-
-                <input type="radio" id="tired" name="mood" value="tired">
-                <label for="tired" class="mood-label">😴 Tired</label>
+            <div class="input-wrapper">
+                <input type="text" id="moodInput" placeholder="Describe your mood...">
+                <button id="submitMood">Find Recipe</button>
             </div>
+            <p class="mood-hint">We can process these emotions: happy, sad, stressed, energetic, tired</p>
         </div>
 
         <div id="recipe-results" class="recipe-results"></div>
